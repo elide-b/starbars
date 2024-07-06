@@ -48,4 +48,3 @@ def draw_annotation(annotations, bar_margin=0.03, tip_length=0.03, fontsize=10, 
                  color=col, fontsize=fontsize)
     y_min, y_max = plt.gcf().axes[0].get_ylim()
     plt.gcf().axes[0].set_ylim(y_min, y_max + top_margin * (y_max - y_min))
-    plt.show()
