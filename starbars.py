@@ -1,4 +1,11 @@
+"""
+Visualize statistical significance on existing Matplotlib plots by adding
+significance bars and p-value labels between chosen pairs of columns.
+"""
+
 import matplotlib.pyplot as plt
+
+__version__ = "1.0.0"
 
 
 def pvalue_to_asterisks(pvalue):
