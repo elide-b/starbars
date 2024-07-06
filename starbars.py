@@ -13,12 +13,12 @@ def pvalue_to_asterisks(pvalue):
     return "ns"
 
 
-def draw_annotation(pairs, bar_margin=0.03, tip_length=0.03, fontsize=10, top_margin=0.03):
+def draw_annotation(annotations, bar_margin=0.03, tip_length=0.03, fontsize=10, top_margin=0.03):
     """
     Draw statistical significance bars and p-value labels between chosen pairs of columns on existing plots.
 
-    :param pairs: list of tuples containing the x-axis labels and the p-value of the pair.
-    :type pairs: list[tuple[float | str, float | str, float]]
+    :param annotations: list of tuples containing the x-axis labels and the p-value of the pair.
+    :type annotations: list[tuple[float | str, float | str, float]]
     :param bar_margin: margin of the bar from data. Default is 3% of the data.
     :param tip_length: length of the tip of the statistical bar. Default is 3% relative to data range.
     :param fontsize: font size of the annotations.
@@ -27,7 +27,7 @@ def draw_annotation(pairs, bar_margin=0.03, tip_length=0.03, fontsize=10, top_ma
 
     y_min, y_max = plt.gcf().axes[0].get_ylim()
     height = y_max
-    for (x1, x2, pvalue) in pairs:
+    for (x1, x2, pvalue) in annotations:
         tick_positions = plt.gca().get_xticks()
         tick_labels = [tick.get_text() for tick in plt.gca().get_xticklabels()]
         x1_position = tick_positions[tick_labels.index(x1)]
