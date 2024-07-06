@@ -1,4 +1,4 @@
-# Statistical Significance Annotation Tool
+# ✨ starbars ✨
 
 This Python tool helps visualizing statistical significance on existing Matplotlib plots by adding significance bars and p-value labels between chosen pairs of columns.
 
@@ -15,14 +15,6 @@ You can install the package via pip:
 ```bash
 pip install starbars
 ```
-
-#### Parameters
-
-- `pairs`: List of tuples containing the x-axis labels and the p-value of the pair.
-- `bar_margin`: Margin of the bar from data. Default is 3% of the data.
-- `tip_length`: Length of the tip of the statistical bar. Default is 3% relative to data range.
-- `fontsize`: Font size of the annotations.
-- `top_margin`: Margin of the last annotation from the top of the graph. Default is 3% of the data.
 
 ### Example
 
@@ -45,6 +37,14 @@ plt.show()
 ```
 
 This example creates a simple bar plot and uses the `draw_annotation` function to add statistical significance annotations between the specified pairs.
+
+#### Parameters
+
+- `annotations`: List of tuples `(x1, x2, p)` containing the x-axis labels and the p-value of the pair.
+- `bar_margin`: Margin of the bar from data. Default is 3% of the data.
+- `tip_length`: Length of the tip of the statistical bar. Default is 3% relative to data range.
+- `fontsize`: Font size of the annotations.
+- `top_margin`: Margin of the last annotation from the top of the graph. Default is 3% of the data.
 
 ## Contributing
 
