@@ -35,7 +35,9 @@ You can install the package via pip:
 Example
 =======
 
-.. code-block:: python
+
+.. plot::
+   :include-source:
 
    import starbars
    import matplotlib.pyplot as plt
@@ -51,6 +53,7 @@ Example
    starbars.draw_annotation(annotations)
 
    plt.show()
+
 
 
 Parameters
