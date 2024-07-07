@@ -43,7 +43,7 @@ def draw_annotation(annotations, bar_margin=0.03, tip_length=0.03, fontsize=10, 
         h = tip_length * (height - y_min)
         col = 'k'
         plt.plot([x1_position, x1_position, x2_position, x2_position], [y1, y1 + h, y1 + h, y1], lw=1.5, c=col)
-        height = y1 + h
+        height = y1 + 2 * h
         plt.text((x1_position + x2_position) * .5, y1 + h, pvalue_to_asterisks(pvalue), ha='center', va='bottom',
                  color=col, fontsize=fontsize)
     y_min, y_max = plt.gcf().axes[0].get_ylim()
