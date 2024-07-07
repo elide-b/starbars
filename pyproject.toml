@@ -10,5 +10,13 @@ license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["version", "description"]
 
+[project.optional-dependencies]
+docs = [
+    "sphinx-book-theme~=1.1",
+    "sphinx~=7.0",
+    "matplotlib~=3.9"
+]
+
 [project.urls]
 Home = "https://github.com/elide-b/starbars"
+
