@@ -37,6 +37,8 @@ plt.show()
 ```
 
 This example creates a simple bar plot and uses the `draw_annotation` function to add statistical significance annotations between the specified pairs.
+For more detailed examples, please check the [example](https://github.com/elide-b/starbars/blob/main/example.py)
+folder.
 
 #### Parameters
 

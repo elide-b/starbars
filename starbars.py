@@ -37,14 +37,18 @@ def draw_annotation(annotations, bar_margin=0.03, tip_length=0.03, fontsize=10, 
     for (x1, x2, pvalue) in annotations:
         tick_positions = plt.gca().get_xticks()
         tick_labels = [tick.get_text() for tick in plt.gca().get_xticklabels()]
-        x1_position = tick_positions[tick_labels.index(x1)]
-        x2_position = tick_positions[tick_labels.index(x2)]
+        try:
+            x1_position = tick_positions[tick_labels.index(x1)]
+            x2_position = tick_positions[tick_labels.index(x2)]
+        except ValueError:
+            x1_position = x1
+            x2_position = x2
         y1 = height + bar_margin * (height - y_min)
         h = tip_length * (height - y_min)
         col = 'k'
         plt.plot([x1_position, x1_position, x2_position, x2_position], [y1, y1 + h, y1 + h, y1], lw=1.5, c=col)
         height = y1 + 2 * h
-        plt.text((x1_position + x2_position) * .5, y1 + h, pvalue_to_asterisks(pvalue), ha='center', va='bottom',
-                 color=col, fontsize=fontsize)
+        plt.text((x1_position + x2_position) * .5, y1 + h + bar_margin, pvalue_to_asterisks(pvalue), ha='center',
+                 va='bottom', color=col, fontsize=fontsize)
     y_min, y_max = plt.gcf().axes[0].get_ylim()
     plt.gcf().axes[0].set_ylim(y_min, y_max + top_margin * (y_max - y_min))
