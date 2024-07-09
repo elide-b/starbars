@@ -26,9 +26,7 @@ import matplotlib.pyplot as plt
 categories = ['A', 'B', 'C']
 values = [10, 20, 15]
 annotations = [('A', 'B', 0.01), ('B', 'C', 0.05)]
-
 plt.bar(categories, values)
-
 
 # Annotate significance
 starbars.draw_annotation(annotations)
@@ -37,8 +35,7 @@ plt.show()
 ```
 
 This example creates a simple bar plot and uses the `draw_annotation` function to add statistical significance annotations between the specified pairs.
-For more detailed examples, please check the [example](https://github.com/elide-b/starbars/blob/main/example.py)
-folder.
+For more detailed examples, please check the [example](https://github.com/elide-b/starbars/blob/main/example.py).
 
 #### Parameters
 
