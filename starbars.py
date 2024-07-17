@@ -5,7 +5,7 @@ significance bars and p-value labels between chosen pairs of columns.
 
 import matplotlib.pyplot as plt
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 
 
 def pvalue_to_asterisks(pvalue):
