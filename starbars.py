@@ -26,6 +26,7 @@ def draw_annotation(annotations, ns_show=True, bar_margin=0.03, tip_length=0.03,
 
     :param annotations: list of tuples containing the x-axis labels and the p-value of the pair.
     :type annotations: list[tuple[float | str, float | str, float]]
+    :param ns_show: whether to show non-statistical bars. (Default: True)
     :param bar_margin: margin of the bar from data. Default is 3% of the data.
     :param tip_length: length of the tip of the statistical bar. Default is 3% relative to data range.
     :param fontsize: font size of the annotations.
