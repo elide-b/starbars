@@ -59,6 +59,7 @@ Parameters
 ==========
 
 - ``annotations``: List of tuples `(x1, x2, p)` containing the x-axis labels and the p-value of the pair.
+- ``ns_show``: Whether to show bars for non-statistical pvalues. (Default: True)
 - ``bar_margin``: Margin of the bar from data. Default is 3% of the data.
 - ``tip_length``: Length of the tip of the statistical bar. Default is 3% relative to data range.
 - ``fontsize``: Font size of the annotations.
