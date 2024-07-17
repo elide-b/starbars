@@ -5,7 +5,7 @@ significance bars and p-value labels between chosen pairs of columns.
 
 import matplotlib.pyplot as plt
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 def pvalue_to_asterisks(pvalue):
@@ -20,7 +20,7 @@ def pvalue_to_asterisks(pvalue):
     return "ns"
 
 
-def draw_annotation(annotations, bar_margin=0.03, tip_length=0.03, fontsize=10, top_margin=0.03):
+def draw_annotation(annotations, ns_show=True, bar_margin=0.03, tip_length=0.03, fontsize=10, top_margin=0.03):
     """
     Draw statistical significance bars and p-value labels between chosen pairs of columns on existing plots.
 
@@ -46,9 +46,20 @@ def draw_annotation(annotations, bar_margin=0.03, tip_length=0.03, fontsize=10, 
         y1 = height + bar_margin * (height - y_min)
         h = tip_length * (height - y_min)
         col = 'k'
-        plt.plot([x1_position, x1_position, x2_position, x2_position], [y1, y1 + h, y1 + h, y1], lw=1.5, c=col)
-        height = y1 + 2 * h
-        plt.text((x1_position + x2_position) * .5, y1 + h + bar_margin, pvalue_to_asterisks(pvalue), ha='center',
-                 va='bottom', color=col, fontsize=fontsize)
+        if ns_show:
+            plt.plot([x1_position, x1_position, x2_position, x2_position], [y1, y1 + h, y1 + h, y1], lw=1.5, c=col)
+            height = y1 + 2 * h
+            plt.text((x1_position + x2_position) * .5, y1 + h + bar_margin, pvalue_to_asterisks(pvalue), ha='center',
+                         va='bottom', color=col, fontsize=fontsize)
+        else:
+            if pvalue_to_asterisks(pvalue) == 'ns':
+                pass
+            else:
+                plt.plot([x1_position, x1_position, x2_position, x2_position], [y1, y1 + h, y1 + h, y1], lw=1.5, c=col)
+                height = y1 + 2 * h
+                plt.text((x1_position + x2_position) * .5, y1 + h + bar_margin, pvalue_to_asterisks(pvalue),
+                         ha='center',
+                         va='bottom', color=col, fontsize=fontsize)
+
     y_min, y_max = plt.gcf().axes[0].get_ylim()
     plt.gcf().axes[0].set_ylim(y_min, y_max + top_margin * (y_max - y_min))
