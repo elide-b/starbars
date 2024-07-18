@@ -5,7 +5,7 @@ significance bars and p-value labels between chosen pairs of columns.
 
 import matplotlib.pyplot as plt
 
-__version__ = "1.1.0"
+__version__ = "1.1.1"
 
 
 def pvalue_to_asterisks(pvalue):
@@ -44,12 +44,12 @@ def draw_annotation(annotations, ns_show=True, bar_margin=0.03, tip_length=0.03,
         except ValueError:
             x1_position = x1
             x2_position = x2
-        y1 = height + bar_margin * (height - y_min)
-        h = tip_length * (height - y_min)
+        y1 = height + bar_margin * 0.8 * (height - y_min)
+        h = tip_length * 0.8 * (height - y_min)
         col = 'k'
         if ns_show:
             plt.plot([x1_position, x1_position, x2_position, x2_position], [y1, y1 + h, y1 + h, y1], lw=1.5, c=col)
-            height = y1 + 2 * h
+            height = y1 + 2.5 * h
             plt.text((x1_position + x2_position) * .5, y1 + h + bar_margin, pvalue_to_asterisks(pvalue), ha='center',
                          va='bottom', color=col, fontsize=fontsize)
         else:
@@ -57,7 +57,7 @@ def draw_annotation(annotations, ns_show=True, bar_margin=0.03, tip_length=0.03,
                 pass
             else:
                 plt.plot([x1_position, x1_position, x2_position, x2_position], [y1, y1 + h, y1 + h, y1], lw=1.5, c=col)
-                height = y1 + 2 * h
+                height = y1 + 2.5 * h
                 plt.text((x1_position + x2_position) * .5, y1 + h + bar_margin, pvalue_to_asterisks(pvalue),
                          ha='center',
                          va='bottom', color=col, fontsize=fontsize)
