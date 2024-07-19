@@ -1,6 +1,13 @@
-# ✨ starbars ✨
+# <p align=center>✨ starbars ✨</p>
 
-This Python tool helps visualizing statistical significance on existing Matplotlib plots by adding significance bars and p-value labels between chosen pairs of columns.
+<p align=center>
+    This Python tool helps visualizing statistical significance on existing Matplotlib
+    plots by adding significance bars and p-value labels between chosen pairs of columns.
+
+<br />
+<br />
+<img src="./example.png" alt="Example plot" height="200px" />
+</p>
 
 ## Features
 
