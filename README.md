@@ -6,7 +6,7 @@
 
 <br />
 <br />
-<img src="./example.png" alt="Example plot" height="200px" />
+<img src="./example.png" alt="Example plot" height="300px" />
 </p>
 
 ## Features
