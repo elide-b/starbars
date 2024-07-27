@@ -5,22 +5,13 @@ significance bars and p-value labels between chosen pairs of columns.
 
 import matplotlib.pyplot as plt
 
-__version__ = "1.2.0"
+from .utils import pvalue_to_asterisks, get_positions
+
+__version__ = "1.3.0"
 
 
-def pvalue_to_asterisks(pvalue):
-    if pvalue <= 0.0001:
-        return "****"
-    elif pvalue <= 0.001:
-        return "***"
-    elif pvalue <= 0.01:
-        return "**"
-    elif pvalue <= 0.05:
-        return "*"
-    return "ns"
-
-
-def draw_annotation(annotations, ax=None, ns_show=True, bar_margin=0.03, tip_length=0.03, fontsize=10, top_margin=0.03):
+def draw_annotation(annotations, ax=None, ns_show=True, bar_margin=0.03, tip_length=0.03,
+                    fontsize=10, top_margin=0.03):
     """
     Draw statistical significance bars and p-value labels between chosen pairs of columns on existing plots.
 
@@ -43,14 +34,7 @@ def draw_annotation(annotations, ax=None, ns_show=True, bar_margin=0.03, tip_len
 
     # Get the positions of the values
     for (x1, x2, pvalue) in annotations:
-        tick_positions = ax.get_xticks()
-        tick_labels = [tick.get_text() for tick in ax.get_xticklabels()]
-        try:
-            x1_position = tick_positions[tick_labels.index(x1)]
-            x2_position = tick_positions[tick_labels.index(x2)]
-        except ValueError:
-            x1_position = x1
-            x2_position = x2
+        x1_position, x2_position = get_positions(ax, x1, x2)
         y1 = height + bar_margin * 0.8 * (height - y_min)
         h = tip_length * 0.8 * (height - y_min)
         text = pvalue_to_asterisks(pvalue)

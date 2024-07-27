@@ -12,4 +12,5 @@ Happy coding and may your plots be ever beautifully annotated! ✨🚀
 
    specific/basic
    specific/subplots
+   specific/hue
 
