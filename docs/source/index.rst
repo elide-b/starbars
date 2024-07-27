@@ -7,10 +7,11 @@ Welcome to ✨ starbars' ✨ documentation!
 ==========================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    starbars
+   examples/examples
 
 
 This Python tool helps visualize statistical significance on existing Matplotlib plots by adding significance bars and p-value labels between chosen pairs of columns.
@@ -21,7 +22,7 @@ Features
 - Converts p-values to asterisk notations for easy interpretation.
 - Draws statistical significance bars on Matplotlib plots.
 - Customizable bar margins, tip lengths, font sizes, and top margins.
-- More features to ✨ come ✨
+- More features to ✨ come ✨.
 
 Installation
 ============
@@ -32,12 +33,23 @@ You can install the package via pip:
 
    pip install starbars
 
+Parameters
+==========
+
+- ``annotations``: List of tuples `(x1, x2, p)` containing the x-axis labels and the p-value of the pair.
+- ``ax``: The axis of subplots to draw annotations on. If `ax` is not provided, it implies that you are working with a single plot rather than a set of subplots. In such cases, the annotations apply to the only existing plot in the figure.
+- ``ns_show``: Whether to show bars for non-statistical pvalues. (Default: True)
+- ``bar_margin``: Margin of the bar from data. Default is 3% of the data.
+- ``tip_length``: Length of the tip of the statistical bar. Default is 3% relative to data range.
+- ``fontsize``: Font size of the annotations.
+- ``top_margin``: Margin of the last annotation from the top of the graph. Default is 3% of the data.
+
 Example
 =======
 
-
 .. plot::
    :include-source:
+
 
    import starbars
    import matplotlib.pyplot as plt
@@ -54,16 +66,6 @@ Example
 
    plt.show()
 
-
-Parameters
-==========
-
-- ``annotations``: List of tuples `(x1, x2, p)` containing the x-axis labels and the p-value of the pair.
-- ``ns_show``: Whether to show bars for non-statistical pvalues. (Default: True)
-- ``bar_margin``: Margin of the bar from data. Default is 3% of the data.
-- ``tip_length``: Length of the tip of the statistical bar. Default is 3% relative to data range.
-- ``fontsize``: Font size of the annotations.
-- ``top_margin``: Margin of the last annotation from the top of the graph. Default is 3% of the data.
 
 License
 =======

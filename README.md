@@ -47,7 +47,8 @@ For more detailed examples, please check the [example](https://github.com/elide-
 #### Parameters
 
 - `annotations`: List of tuples `(x1, x2, p)` containing the x-axis labels and the p-value of the pair.
-- `ns_show`: Whether to show bars for non-statistical pvalues. (Default: True)
+- `ns_show`: Whether to show bars for non-statistical p-values. (Default: True)
+- `ax`: The axis of subplots to draw annotations on. If `ax` is not provided, it implies that you are working with a single plot rather than a set of subplots. In such cases, the annotations apply to the only existing plot in the figure. (Default: None)
 - `bar_margin`: Margin of the bar from data. Default is 3% of the data.
 - `tip_length`: Length of the tip of the statistical bar. Default is 3% relative to data range.
 - `fontsize`: Font size of the annotations.

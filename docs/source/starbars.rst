@@ -1,7 +1,5 @@
-starbars module
-===============
+Draw annotations
+================
 
-.. automodule:: starbars
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autofunction:: starbars.draw_annotation
+
