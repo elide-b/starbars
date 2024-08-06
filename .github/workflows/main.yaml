@@ -39,6 +39,8 @@ jobs:
         pip install ${{ matrix.matplotlib }}
         # Install seaborn
         pip install ${{ matrix.seaborn }}
+        # Fix numpy version
+        pip install numpy~=1.20
 
     - name: Run tests & coverage
       run: pytest --cov=starbars
