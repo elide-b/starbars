@@ -18,6 +18,7 @@ docs = [
 ]
 test = [
     "pytest",
+    "pytest-cov",
     "pandas",
     "seaborn",
     "scipy"
