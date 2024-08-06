@@ -9,8 +9,8 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
-        matplotlib-version: ["3.6.0", "3.7.0", "3.8.0", "3.9.0"]
-        seaborn-version: ["0.13.0"]
+        matplotlib-version: ["matplotlib==3.6.0", "matplotlib==3.7.0", "matplotlib==3.8.0", "matplotlib==3.9.0"]
+        seaborn-version: ["seaborn==0.13.0"]
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -36,9 +36,9 @@ jobs:
         # Install starbars
         pip install -e .[test]
         # Install matplotlib
-        pip install matplotlib==${{ matrix.matplotlib-version }}
+        pip install ${{ matrix.matplotlib }}
         # Install seaborn
-        pip install seaborn==${{ matrix.seaborn-version }}
+        pip install ${{ matrix.seaborn }}
 
     - name: Run tests & coverage
       run: pytest --cov=starbars

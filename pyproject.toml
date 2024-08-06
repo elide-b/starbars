@@ -17,6 +17,7 @@ docs = [
     "matplotlib~=3.9"
 ]
 test = [
+    "pytest",
     "pandas",
     "seaborn",
     "scipy"
