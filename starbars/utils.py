@@ -1,7 +1,7 @@
 import itertools
 
 import numpy as np
-from matplotlib.patches import Rectangle, PathPatch
+from matplotlib.patches import PathPatch
 
 
 def check_tuples(x1, x2):

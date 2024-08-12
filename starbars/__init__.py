@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from .utils import pvalue_to_asterisks, get_positions
 
-__version__ = "1.3.0"
+__version__ = "1.3.1"
 
 
 def draw_annotation(annotations, ax=None, ns_show=True, bar_margin=0.03, tip_length=0.03,
@@ -31,12 +31,13 @@ def draw_annotation(annotations, ax=None, ns_show=True, bar_margin=0.03, tip_len
 
     y_min, y_max = ax.get_ylim()
     height = y_max
+    y_range = y_max - y_min
 
     # Get the positions of the values
     for (x1, x2, pvalue) in annotations:
         x1_position, x2_position = get_positions(ax, x1, x2)
-        y1 = height + bar_margin * 0.8 * (height - y_min)
-        h = tip_length * 0.8 * (height - y_min)
+        y1 = height + bar_margin * (y_range)
+        h = tip_length * (y_range)
         text = pvalue_to_asterisks(pvalue)
 
         # Draw the statistical annotation
@@ -48,4 +49,4 @@ def draw_annotation(annotations, ax=None, ns_show=True, bar_margin=0.03, tip_len
 
         # Adjust the y-axis limit of the current subplot to accommodate the top margin
         y_min, y_max = ax.get_ylim()
-        ax.set_ylim(y_min, y_max + top_margin * (height + y_max))
+        ax.set_ylim(y_min, y_range * top_margin + height)
