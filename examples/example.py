@@ -21,3 +21,13 @@ starbars.draw_annotation(annotations)
 
 plt.show()
 
+# Example data with negative numbers
+categories = ['A', 'B', 'C']
+values = [-10, -20, -15]
+annotations = [('A', 'B', 0.01), ('B', 'C', 0.5), ('A', 'C', 0.0002)]
+
+plt.bar(categories, values)
+
+# Annotate significance
+starbars.draw_annotation(annotations)
+plt.show()
