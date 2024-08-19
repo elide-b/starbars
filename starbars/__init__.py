@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from .utils import pvalue_to_asterisks, get_positions
 
-__version__ = "1.3.2"
+__version__ = "1.4.0"
 
 
 def draw_annotation(annotations, ax=None, ns_show=True, bar_margin=0.03, tip_length=0.03,
