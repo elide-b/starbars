@@ -6,21 +6,33 @@ from matplotlib.patches import PathPatch
 
 def check_tuples(x1, x2):
     # Check if both x1 and x2 are tuples or neither are tuples
-    if (isinstance(x1, tuple) and not isinstance(x2, tuple)) or (not isinstance(x1, tuple) and isinstance(x2, tuple)):
-        raise ValueError("Both variables must either be tuples or neither must be tuples.")
+    if (isinstance(x1, tuple) and not isinstance(x2, tuple)) or (
+        not isinstance(x1, tuple) and isinstance(x2, tuple)
+    ):
+        raise ValueError(
+            "Both variables must either be tuples or neither must be tuples."
+        )
 
     return True
 
+
 def pvalue_to_asterisks(pvalue):
-    if pvalue <= 0.0001:
-        return "****"
-    elif pvalue <= 0.001:
-        return "***"
-    elif pvalue <= 0.01:
-        return "**"
-    elif pvalue <= 0.05:
-        return "*"
-    return "ns"
+    try:
+        pvalue = float(pvalue)
+    except ValueError:
+        return pvalue
+    else:
+        if pvalue <= 0.0001:
+            return "****"
+        elif pvalue <= 0.001:
+            return "***"
+        elif pvalue <= 0.01:
+            return "**"
+        elif pvalue <= 0.05:
+            return "*"
+        else:
+            return "ns"
+
 
 def get_tick_position(ax, x1, x2):
     tick_positions = ax.get_xticks()
@@ -52,18 +64,29 @@ def get_positions(ax, x1, x2):
             hue_count = len(hue_labels)
             # Calculate amount of groups: (n_patches - legend_patches) / n_hues
             group_count = (len(ax.patches) - hue_count) // hue_count
-            patch_to_hue = [*itertools.chain.from_iterable([label] * group_count for label in hue_labels)]
+            patch_to_hue = [
+                *itertools.chain.from_iterable(
+                    [label] * group_count for label in hue_labels
+                )
+            ]
 
             # Get the x positions and hue labels from the patches
             bar_positions = {label: [] for label in hue_labels}
-            for i, patch in enumerate(ax.patches[:group_count * hue_count]):
+            for i, patch in enumerate(ax.patches[: group_count * hue_count]):
                 hue_label = patch_to_hue[i]
-                bbox = patch.get_path().get_extents() if isinstance(patch, PathPatch) else patch.get_bbox()
+                bbox = (
+                    patch.get_path().get_extents()
+                    if isinstance(patch, PathPatch)
+                    else patch.get_bbox()
+                )
                 bar_positions[hue_label].append(bbox.x0 + (bbox.width / 2))
 
             # Clean up the positions
             cleaned_positions = {
-                key: [float(value) if isinstance(value, np.float64) else value for value in values]
+                key: [
+                    float(value) if isinstance(value, np.float64) else value
+                    for value in values
+                ]
                 for key, values in bar_positions.items()
             }
 

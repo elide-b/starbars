@@ -66,6 +66,31 @@ Example
 
    plt.show()
 
+Custom labels
+=============
+
+If you prefer different labels on the annotation bars, instead of passing your p-value,
+you may also pass any string you'd like. Starbars will then render it:
+
+.. plot::
+   :include-source:
+
+
+   import starbars
+   import matplotlib.pyplot as plt
+
+   # Example data
+   categories = ['A', 'B', 'C']
+   values = [10, 20, 18]
+   annotations = [('A', 'B', 'p < 0.01'), ('B', 'C', 'not significant :(')]
+
+   plt.bar(categories, values)
+
+   # Annotate significance
+   starbars.draw_annotation(annotations)
+
+   plt.show()
+
 
 License
 =======
