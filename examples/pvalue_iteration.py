@@ -3,11 +3,7 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 
 # Example with iteration to find the p-value
-values_dict = {
-    'A': [1, 2, 3, 4, 5],
-    'B': [2, 3, 4, 5, 6],
-    'C': [3, 4, 5, 6, 7]
-}
+values_dict = {"A": [1, 2, 3, 4, 5], "B": [2, 3, 4, 5, 6], "C": [3, 4, 5, 6, 7]}
 
 annotations = []
 keys = list(values_dict.keys())
@@ -27,6 +23,6 @@ values = [values_dict[key] for key in keys]
 
 # Create boxplot
 plt.boxplot(values, tick_labels=keys, patch_artist=True)
-starbars.draw_annotation(annotations)
+starbars.draw_annotation(annotations, text_distance=0.03)
 
 plt.show()
