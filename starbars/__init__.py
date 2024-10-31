@@ -19,8 +19,10 @@ def draw_annotation(
     top_margin=0.05,
     text_distance=0.02,
     fontsize=10,
-    line_width=1, 
-    color='k',
+    line_width=1.5,
+    color="k",
+    text_args=None,
+    line_args=None,
 ):
     """
     Draw statistical significance bars and p-value labels between chosen pairs of columns on existing plots.
@@ -34,9 +36,17 @@ def draw_annotation(
     :param top_margin: margin of the last annotation from the top of the graph. Default is 5% of the y-axis.
     :param text_distance: distance between the bar and the text of the text. Default is 2% of the y-axis.
     :param fontsize: font size of the annotations. Default is 10.
+    :param color: color of the annotations, as matplotlib color value. Default is black.
+    :param line_width: width of the line. Default is 1.5.
+    :param dict line_args: Additional dictionary of arguments which will be passed to ax.plot for drawing lines.
+    :param dict text_args: Additional dictionary of arguments which will be passed to ax.text for drawing text.
     """
     if ax is None:
         ax = plt.gca()
+    if line_args is None:
+        line_args = {}
+    if text_args is None:
+        text_args = {}
 
     dpi = ax.figure.dpi
     px_txt = (fontsize / 72) * dpi
@@ -80,7 +90,13 @@ def draw_annotation(
 
     # Draw the statistical annotation
     for bar, text_pos, label in zip(bars, text_positions, text_labels):
-        ax.plot([c[0] for c in bar], [c[1] for c in bar], lw=1.5, c="k")
+        ax.plot(
+            [c[0] for c in bar],
+            [c[1] for c in bar],
+            lw=line_width,
+            c=color,
+            **line_args
+        )
         ax.text(
             text_pos[0],
             text_pos[1],
@@ -89,6 +105,7 @@ def draw_annotation(
             va="center",
             fontsize=fontsize,
             color=color,
+            **text_args
         )
 
     if len(annotations) == 0:
