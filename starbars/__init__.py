@@ -19,7 +19,9 @@ def draw_annotation(
     top_margin=0.05,
     text_distance=0.02,
     fontsize=10,
-    lw=1, c='k', **kwargs
+    line_width=1, 
+    color='k', 
+    **kwargs
 ):
     """
     Draw statistical significance bars and p-value labels between chosen pairs of columns on existing plots.
@@ -74,7 +76,7 @@ def draw_annotation(
 
     # Draw the statistical annotation
     for bar, text, (_, _, pvalue) in zip(bars, texts, annotations):
-        ax.plot([c[0] for c in bar], [c[1] for c in bar], lw=lw, c=c, **kwargs)
+        ax.plot([c[0] for c in bar], [c[1] for c in bar], lw=line_width, c=color, **kwargs)
         if ns_show or pvalue != "ns":
             ax.text(
                 text[0],
@@ -83,7 +85,7 @@ def draw_annotation(
                 ha="center",
                 va="center",
                 fontsize=fontsize,
-                color=c,
+                color=color,
             )
 
     if len(annotations) == 0:
