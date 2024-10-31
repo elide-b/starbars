@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 from .utils import pvalue_to_asterisks, get_positions
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 
 
 def draw_annotation(
@@ -20,8 +20,7 @@ def draw_annotation(
     text_distance=0.02,
     fontsize=10,
     line_width=1, 
-    color='k', 
-    **kwargs
+    color='k',
 ):
     """
     Draw statistical significance bars and p-value labels between chosen pairs of columns on existing plots.
@@ -48,10 +47,14 @@ def draw_annotation(
     )[1]
 
     bars = []
-    texts = []
+    text_positions = []
+    text_labels = []
 
     # Get the positions of the values
     for x1, x2, pvalue in annotations:
+        label = pvalue_to_asterisks(pvalue)
+        if label == "ns" and not ns_show:
+            continue
         x1_position, x2_position = get_positions(ax, x1, x2)
         x1_px = ax.transData.transform((x1_position, y))[0]
         x2_px = ax.transData.transform((x2_position, y))[0]
@@ -59,7 +62,7 @@ def draw_annotation(
 
         bar_x = [x1_px, x1_px, x2_px, x2_px]
         bar_y = [y_px, px_ax * tip_length + y_px, px_ax * tip_length + y_px, y_px]
-        text = ax.transData.inverted().transform(
+        text_pos = ax.transData.inverted().transform(
             ((x1_px + x2_px) / 2, px_ax * tip_length + y_px + px_ax * text_distance)
         )
 
@@ -67,7 +70,8 @@ def draw_annotation(
             ax.transData.inverted().transform((_x, _y)) for _x, _y in zip(bar_x, bar_y)
         ]
         bars.append(points)
-        texts.append(text)
+        text_positions.append(text_pos)
+        text_labels.append(label)
 
         # Move up the y point to the next bar's start y
         y = ax.transData.inverted().transform(
@@ -75,18 +79,17 @@ def draw_annotation(
         )[1]
 
     # Draw the statistical annotation
-    for bar, text, (_, _, pvalue) in zip(bars, texts, annotations):
-        ax.plot([c[0] for c in bar], [c[1] for c in bar], lw=line_width, c=color, **kwargs)
-        if ns_show or pvalue != "ns":
-            ax.text(
-                text[0],
-                text[1],
-                pvalue_to_asterisks(pvalue),
-                ha="center",
-                va="center",
-                fontsize=fontsize,
-                color=color,
-            )
+    for bar, text_pos, label in zip(bars, text_positions, text_labels):
+        ax.plot([c[0] for c in bar], [c[1] for c in bar], lw=1.5, c="k")
+        ax.text(
+            text_pos[0],
+            text_pos[1],
+            label,
+            ha="center",
+            va="center",
+            fontsize=fontsize,
+            color=color,
+        )
 
     if len(annotations) == 0:
         return
