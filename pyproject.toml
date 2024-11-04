@@ -9,18 +9,24 @@ readme = "README.md"
 license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["version", "description"]
+dependencies = ["matplotlib~=3.9"]
 
 [project.optional-dependencies]
 docs = [
+    "starbars[examples]",
     "sphinx-book-theme~=1.1",
     "sphinx~=7.0",
-    "matplotlib~=3.9"
+]
+examples = [
+    "pandas~=2.2",
+    "seaborn~=0.13",
+    "scipy~=1.14"
 ]
 test = [
     "pytest",
     "pytest-cov",
-    "pandas",
-    "seaborn",
+    "pandas~=2.2",
+    "seaborn~=0.13",
     "scipy"
 ]
 
