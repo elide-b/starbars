@@ -13,6 +13,7 @@ dependencies = ["matplotlib~=3.9"]
 
 [project.optional-dependencies]
 docs = [
+    "starbars[examples]",
     "sphinx-book-theme~=1.1",
     "sphinx~=7.0",
 ]
