@@ -1,4 +1,5 @@
 import itertools
+import logging
 
 import numpy as np
 from matplotlib.patches import PathPatch
@@ -108,3 +109,14 @@ def get_positions(ax, box1, box2, mode):
         position1, position2 = get_tick_position(ax, box1, box2, mode)
 
     return position1, position2
+
+
+def get_starbars_logger(level):
+    logger = logging.getLogger("✨starbars✨")
+    logger.setLevel(level)
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(level)
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    console_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+    return logger

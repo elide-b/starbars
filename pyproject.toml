@@ -18,7 +18,8 @@ docs = [
 ]
 examples = [
     "pandas~=2.2",
-    "seaborn~=0.13"
+    "seaborn~=0.13",
+    "scipy~=1.14"
 ]
 test = [
     "pytest",

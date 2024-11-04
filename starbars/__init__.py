@@ -3,11 +3,18 @@ Visualize statistical significance on existing Matplotlib plots by adding
 significance bars and p-value labels between chosen pairs of columns.
 """
 
+import logging
+import os
+
 import matplotlib.pyplot as plt
 
-from .utils import pvalue_to_asterisks, get_positions
+from ._utils import pvalue_to_asterisks, get_positions, get_starbars_logger
 
-__version__ = "2.0.1"
+__version__ = "3.0.0"
+
+
+DEBUG = bool(os.environ.get("DEBUG_STARBARS", False))
+_logger = get_starbars_logger(logging.DEBUG if DEBUG else logging.INFO)
 
 
 def draw_annotation(
@@ -29,11 +36,14 @@ def draw_annotation(
     :param ax: The axis of subplots to draw annotations on. If `ax` is not provided, it implies that you are working with a single plot rather than a set of subplots. In such cases, the annotations apply to the only existing plot in the figure.
     :type ax: matplotlib.axes.Axes
     :param ns_show: whether to show non-statistical bars. (Default: True)
-    :param bar_gap: margin of the bar from data. Default is 3% of the y-axis.
-    :param top_margin: margin of the last annotation from the top of the graph. Default is 5% of the y-axis.
-    :param text_distance: distance between the bar and the text of the text. Default is 2% of the y-axis.
+    :param bar_gap: margin of the bar from data. Default is 3% of the data axis.
+    :param tip_length: length of the tip of the bar. Default is 3% of the data axis.
+    :param top_margin: margin of the last annotation from the top of the graph. Default is 5% of the data axis.
+    :param text_distance: distance between the bar and the text of the text. Default is 2% of the data axis.
     :param fontsize: font size of the annotations. Default is 10.
+    :param mode: orientation of the data representation, 'horizontal' or 'vertical'. Default is 'vertical'.
     """
+
     if ax is None:
         ax = plt.gca()
 
@@ -46,7 +56,7 @@ def draw_annotation(
         annot_axis = 0
         unit_vector = (1, 0)
         get_lim = lambda: ax.get_xlim()
-        set_lim = lambda *args: ax.get_xlim(*args)
+        set_lim = lambda *args: ax.set_xlim(*args)
     else:
         raise ValueError("mode must be either 'vertical' or 'horizontal' :)")
 
@@ -66,6 +76,9 @@ def draw_annotation(
     annot = px_to_coords((0, coords_to_px((0, annot))[annot_axis] + px_ax * bar_gap))[
         annot_axis
     ]
+    y = ax.transData.inverted().transform(
+        (0, ax.transData.transform((0, ax.get_ylim()[1]))[1] + px_ax * bar_gap)
+    )[1]
 
     bars = []
     text_positions = []
@@ -118,7 +131,7 @@ def draw_annotation(
             va="center",
             fontsize=fontsize,
             color="k",
-            rotation=90 * (mode == "horizontal"),
+            rotation=-90 * (mode == "horizontal"),
         )
 
     if len(annotations) == 0:
@@ -137,9 +150,9 @@ def draw_annotation(
 
 def create_coordinate_transformer(ax, mode, inverse=False):
     if inverse:
-        transformation = ax.transData.inverted().transform
+        transformation = lambda *args: ax.transData.inverted().transform(*args)
     else:
-        transformation = ax.transData.transform
+        transformation = lambda *args: ax.transData.transform(*args)
 
     if mode == "vertical":
 
@@ -149,6 +162,6 @@ def create_coordinate_transformer(ax, mode, inverse=False):
     else:
 
         def coords_to_px(coords):
-            return transformation(coords.reversed())
+            return transformation(tuple(reversed(coords)))
 
     return coords_to_px

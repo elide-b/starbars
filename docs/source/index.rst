@@ -22,6 +22,7 @@ Features
 - Converts p-values to asterisk notations for easy interpretation.
 - Draws statistical significance bars on Matplotlib plots.
 - Customizable bar margins, tip lengths, font sizes, and top margins.
+- Support :doc:`bar plots <examples/specific/basic>`, :doc:`box plots <examples/specific/iteration>`, :doc:`grouped bar plots (hue) <examples/specific/hue>`, and both :doc:`horizontal <examples/specific/horizontal>` and vertical data layout.
 - More features to ✨ come ✨.
 
 Installation
@@ -39,11 +40,12 @@ Parameters
 - ``annotations``: List of tuples `(x1, x2, p)` containing the x-axis labels and the p-value of the pair.
 - ``ax``: The axis of subplots to draw annotations on. If `ax` is not provided, it implies that you are working with a single plot rather than a set of subplots. In such cases, the annotations apply to the only existing plot in the figure.
 - ``ns_show``: Whether to show bars for non-statistical pvalues. (Default: True)
-- ``bar_gap``: Gap in between the bars of data. Default is 3% of the y-axis.
-- ``tip_length``: Length of the tip of the statistical bar. Default is 3% of the y-axis.
-- ``top_margin``: Margin of the last annotation from the top of the graph. Default is 5% of the y-axis.
-- ``text_distance``: Distance between the bar and the text. Default is 2% of the y-axis.
+- ``bar_gap``: Gap in between the bars of data. Default is 3% of the data axis.
+- ``tip_length``: Length of the tip of the statistical bar. Default is 3% of the data axis.
+- ``top_margin``: Margin of the last annotation from the top of the graph. Default is 5% of the data axis.
+- ``text_distance``: Distance between the bar and the text. Default is 2% of the data axis.
 - ``fontsize``: Font size of the annotations. Default is 10.
+- ``mode``: orientation of the data representation, 'horizontal' or 'vertical'. Default is 'vertical'.
 
 Example
 =======

@@ -2,11 +2,11 @@ import starbars
 import matplotlib.pyplot as plt
 
 # Example data with labels and ns_show=False
-categories = ['A', 'B', 'C', 'D']
+categories = ["A", "B", "C", "D"]
 values = [10, 30, 45, 5]
 plt.bar(categories, values)
 
-annotations = [('A', 'B', 0.5), ('A', 'C', 0.05)]
+annotations = [("A", "B", 0.5), ("A", "C", 0.05)]
 starbars.draw_annotation(annotations, ns_show=False)
 
 plt.show()
@@ -22,9 +22,9 @@ starbars.draw_annotation(annotations)
 plt.show()
 
 # Example data with negative numbers
-categories = ['A', 'B', 'C']
+categories = ["A", "B", "C"]
 values = [-10, -20, -15]
-annotations = [('A', 'B', 0.01), ('B', 'C', 0.5), ('A', 'C', 0.0002)]
+annotations = [("A", "B", 0.01), ("B", "C", 0.5), ("A", "C", 0.0002)]
 
 plt.bar(categories, values)
 
