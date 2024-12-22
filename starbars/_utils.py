@@ -148,7 +148,7 @@ def find_level(ax, annotations, mode):
         annotations,
         key=lambda x: (
             min(get_positions(ax, x[0], x[1], mode)),
-            -abs(
+            abs(
                 get_positions(ax, x[0], x[1], mode)[1]
                 - get_positions(ax, x[0], x[1], mode)[0]
             ),
