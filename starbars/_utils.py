@@ -120,3 +120,22 @@ def get_starbars_logger(level):
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
     return logger
+
+
+def create_coordinate_transformer(ax, mode, inverse=False):
+    if inverse:
+        transformation = lambda *args: ax.transData.inverted().transform(*args)
+    else:
+        transformation = lambda *args: ax.transData.transform(*args)
+
+    if mode == "vertical":
+
+        def coords_to_px(coords):
+            return transformation(coords)
+
+    else:
+
+        def coords_to_px(coords):
+            return transformation(tuple(reversed(coords)))
+
+    return coords_to_px
