@@ -139,3 +139,43 @@ def create_coordinate_transformer(ax, mode, inverse=False):
             return transformation(tuple(reversed(coords)))
 
     return coords_to_px
+
+
+def find_level(ax, annotations, mode):
+
+    # Sort annotations for optimized stacking
+    sorted_annotations = sorted(
+        annotations,
+        key=lambda x: (
+            min(get_positions(ax, x[0], x[1], mode)),
+            -abs(
+                get_positions(ax, x[0], x[1], mode)[1]
+                - get_positions(ax, x[0], x[1], mode)[0]
+            ),
+        ),
+    )
+
+    levels = []
+
+    for box1, box2, pvalue in sorted_annotations:
+
+        # Retrieve positions
+        box_positions = get_positions(ax, box1, box2, mode)
+        box1_pos = min(box_positions)
+        box2_pos = max(box_positions)
+
+        # Find the first available level
+        for level_index, level in enumerate(levels):
+            if all(
+                box1_pos > existing_end or box2_pos < existing_start
+                for existing_start, existing_end, _, _ in level
+            ):
+                levels[level_index].append((box1_pos, box2_pos, level_index, pvalue))
+                break
+        else:
+            # Create new level
+            level_index = len(levels)
+            levels.append([(box1_pos, box2_pos, level_index, pvalue)])
+
+    # Flatten list of lists
+    return [annotation for level in levels for annotation in level]
