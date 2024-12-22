@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 from ._utils import pvalue_to_asterisks, get_positions, get_starbars_logger, find_level
 
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 
 
 DEBUG = bool(os.environ.get("DEBUG_STARBARS", False))
