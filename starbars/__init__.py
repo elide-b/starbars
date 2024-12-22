@@ -31,6 +31,7 @@ def draw_annotation(
     color="k",
     text_args=None,
     line_args=None,
+    h_gap=0.03,
 ):
     """
     Draw statistical significance bars and p-value labels between chosen pairs of columns on existing plots.
@@ -113,6 +114,7 @@ def draw_annotation(
             coords_to_px,
             px_ax,
             tip_length,
+            h_gap,
             px_to_coords,
             text_distance,
             bar_gap,
@@ -166,6 +168,7 @@ def calculate_bar(
     coords_to_px,
     px_ax,
     tip_length,
+    h_gap,
     px_to_coords,
     text_distance,
     bar_gap,
@@ -177,8 +180,8 @@ def calculate_bar(
     if label == "ns" and not ns_show:
         return
 
-    box1_px = coords_to_px((box1_pos, annot))[+(not annot_axis)]
-    box2_px = coords_to_px((box2_pos, annot))[+(not annot_axis)]
+    box1_px = coords_to_px((box1_pos + h_gap / 2, annot))[+(not annot_axis)]
+    box2_px = coords_to_px((box2_pos - h_gap / 2, annot))[+(not annot_axis)]
     annot_px = coords_to_px((box1_pos, annot))[annot_axis]
 
     bar_box = [box1_px, box1_px, box2_px, box2_px]

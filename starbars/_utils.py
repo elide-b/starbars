@@ -167,7 +167,7 @@ def find_level(ax, annotations, mode):
         # Find the first available level
         for level_index, level in enumerate(levels):
             if all(
-                box1_pos > existing_end or box2_pos < existing_start
+                box1_pos >= existing_end or box2_pos <= existing_start
                 for existing_start, existing_end, _, _ in level
             ):
                 levels[level_index].append((box1_pos, box2_pos, level_index, pvalue))
