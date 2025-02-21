@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 from ._utils import pvalue_to_asterisks, get_positions, get_starbars_logger, find_level
 
-__version__ = "3.1.0"
+__version__ = "3.1.1"
 
 
 DEBUG = bool(os.environ.get("DEBUG_STARBARS", False))
@@ -51,6 +51,7 @@ def draw_annotation(
     :param line_width: width of the line. Default is 1.5.
     :param dict line_args: Additional dictionary of arguments which will be passed to ax.plot for drawing lines.
     :param dict text_args: Additional dictionary of arguments which will be passed to ax.text for drawing text.
+    :param h_gap: gap between two neighbouring annotations. Default is 3% of the cross data axis.
     """
 
     if ax is None:
@@ -64,11 +65,13 @@ def draw_annotation(
         annot_axis = 1
         unit_vector = (0, 1)
         get_lim = lambda: ax.get_ylim()
+        get_other_lim = lambda: ax.get_xlim()[1] - ax.get_xlim()[0]
         set_lim = lambda *args: ax.set_ylim(*args)
     elif mode == "horizontal":
         annot_axis = 0
         unit_vector = (1, 0)
         get_lim = lambda: ax.get_xlim()
+        get_other_lim = lambda: ax.get_ylim()[1] - ax.get_ylim()[0]
         set_lim = lambda *args: ax.set_xlim(*args)
     else:
         raise ValueError("mode must be either 'vertical' or 'horizontal' :)")
@@ -113,6 +116,7 @@ def draw_annotation(
             annot_axis,
             coords_to_px,
             px_ax,
+            get_other_lim,
             tip_length,
             h_gap,
             px_to_coords,
@@ -167,6 +171,7 @@ def calculate_bar(
     annot_axis,
     coords_to_px,
     px_ax,
+    get_other_lim,
     tip_length,
     h_gap,
     px_to_coords,
@@ -180,8 +185,13 @@ def calculate_bar(
     if label == "ns" and not ns_show:
         return
 
-    box1_px = coords_to_px((box1_pos + h_gap / 2, annot))[+(not annot_axis)]
-    box2_px = coords_to_px((box2_pos - h_gap / 2, annot))[+(not annot_axis)]
+    box1_px = coords_to_px((box1_pos + h_gap * get_other_lim() / 2, annot))[
+        +(not annot_axis)
+    ]
+    print(get_other_lim(), h_gap)
+    box2_px = coords_to_px((box2_pos - h_gap * get_other_lim() / 2, annot))[
+        +(not annot_axis)
+    ]
     annot_px = coords_to_px((box1_pos, annot))[annot_axis]
 
     bar_box = [box1_px, box1_px, box2_px, box2_px]
