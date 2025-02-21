@@ -54,6 +54,8 @@ For more detailed examples, please check the [example](https://github.com/elide-
 - `top_margin`: Margin of the last annotation from the top of the graph. Default is 5% of the y-axis.
 - `text_distance`: Distance between the bar and the text. Default is 2% of the y-axis.
 - `fontsize`: Font size of the annotations. Default is 10.
+- `h_gap`: gap between two neighbouring annotations. Default is 3% of the cross data axis.
+
 
 
 ## Contributing
